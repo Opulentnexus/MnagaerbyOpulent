@@ -1,3 +1,24 @@
+
+const API_BASE = "https://mangerbyopulent.onrender.com";
+
+const originalFetch = window.fetch;
+
+window.fetch = function(url, options) {
+
+  if (
+    typeof url === "string" &&
+    url.startsWith("/api/")
+  ) {
+    url = API_BASE + url;
+  }
+
+  return originalFetch(url, options);
+};
+
+
+
+
+
 const state = {
   page: "dashboard",
   currentDate: new Date(),
