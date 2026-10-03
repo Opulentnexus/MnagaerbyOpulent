@@ -1,3 +1,4 @@
+const cors = require("cors");
 const PDFDocument = require("pdfkit");
 const express = require("express");
 const ical = require("ical");
@@ -6,6 +7,14 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(
+  cors({
+    origin: [
+      "https://opulentnexus.github.io"
+    ]
+  })
+);
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -1418,7 +1427,6 @@ app.get(
 
 app.listen(
   PORT,
-  "0.0.0.0",
   () => {
 
     console.log(
