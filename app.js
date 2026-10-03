@@ -1352,10 +1352,10 @@ function downloadBookingPeriodPDF() {
   }
 
 
-  window.open(
-    `/api/bookings/pdf?${params.toString()}`,
-    "_blank"
-  );
+ window.open(
+  `${API_BASE}/api/bookings/pdf?${params.toString()}`,
+  "_blank"
+);
 
 }
 
