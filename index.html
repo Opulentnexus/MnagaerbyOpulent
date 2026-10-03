@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Property Management</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        P
+      </div>
+
+      <div>
+        <strong>Property</strong>
+        <span>Management</span>
+      </div>
+
+    </div>
+
+
+    <nav>
+
+      <button
+        class="nav active"
+        data-page="dashboard"
+      >
+        <span>▦</span>
+        Dashboard
+      </button>
+
+      <button
+        class="nav"
+        data-page="calendar"
+      >
+        <span>□</span>
+        Calendar
+      </button>
+
+      <button
+        class="nav"
+        data-page="bookings"
+      >
+        <span>▤</span>
+        Bookings
+      </button>
+
+      <button
+        class="nav"
+        data-page="revenue"
+      >
+        <span>₹</span>
+        Revenue
+      </button>
+
+      <button
+        class="nav"
+        data-page="reports"
+      >
+        <span>◫</span>
+        Reports
+      </button>
+
+      <button
+        class="nav"
+        data-page="connections"
+      >
+        <span>↔</span>
+        OTA Calendars
+      </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <div class="online-dot"></div>
+
+      <div>
+        <strong>System Online</strong>
+        <small>Local database</small>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div>
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+        <p id="pageSubtitle">
+          Property overview
+        </p>
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          class="secondary-btn"
+          id="refreshBtn"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          class="primary-btn"
+          id="quickBookingBtn"
+        >
+          + Booking
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DASHBOARD
+    ====================================================== -->
+
+    <section
+      class="page active-page"
+      id="page-dashboard"
+    >
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon blue">
+            ▤
+          </div>
+
+          <div>
+            <span>Total Bookings</span>
+            <strong id="statBookings">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon green">
+            ₹
+          </div>
+
+          <div>
+            <span>Total Revenue</span>
+            <strong id="statRevenue">
+              ₹0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon purple">
+            ◷
+          </div>
+
+          <div>
+            <span>Total Nights</span>
+            <strong id="statNights">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon orange">
+            ₹
+          </div>
+
+          <div>
+            <span>Average Booking</span>
+            <strong id="statAverage">
+              ₹0
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-grid">
+
+        <div class="panel large-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h2>Revenue Overview</h2>
+              <p>Monthly booking revenue</p>
+            </div>
+
+          </div>
+
+          <div
+            class="chart"
+            id="revenueChart"
+          ></div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h2>Platforms</h2>
+              <p>Booking distribution</p>
+            </div>
+
+          </div>
+
+          <div
+            id="platformSummary"
+            class="platform-summary"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Recent Bookings</h2>
+            <p>Latest reservations</p>
+          </div>
+
+          <button
+            class="small-btn"
+            data-page-link="bookings"
+          >
+            View All
+          </button>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Guest</th>
+                <th>Platform</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Nights</th>
+                <th>Amount</th>
+              </tr>
+
+            </thead>
+
+            <tbody
+              id="recentBookings"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CALENDAR
+    ====================================================== -->
+
+    <section
+      class="page"
+      id="page-calendar"
+    >
+
+      <div class="panel calendar-panel">
+
+        <div class="calendar-toolbar">
+
+          <div class="month-nav">
+
+            <button
+              class="icon-btn"
+              id="prevMonth"
+            >
+              ‹
+            </button>
+
+            <h2 id="monthTitle">
+              October 2026
+            </h2>
+
+            <button
+              class="icon-btn"
+              id="nextMonth"
+            >
+              ›
+            </button>
+
+          </div>
+
+          <button
+            class="secondary-btn"
+            id="todayBtn"
+          >
+            Today
+          </button>
+
+        </div>
+
+
+        <div
+          class="legend"
+          id="calendarLegend"
+        ></div>
+
+
+        <div class="calendar-scroll">
+
+          <div class="weekdays">
+
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+          </div>
+
+          <div
+            class="calendar-grid"
+            id="calendarGrid"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         BOOKINGS
+    ====================================================== -->
+
+    <section
+      class="page"
+      id="page-bookings"
+    >
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Bookings</h2>
+            <p>All reservations</p>
+          </div>
+
+          <button
+            class="primary-btn"
+            id="addBookingBtn"
+          >
+            + Add Booking
+          </button>
+
+        </div>
+
+
+        <div class="filters">
+
+          <input
+            type="date"
+            id="bookingFrom"
+          >
+
+          <input
+            type="date"
+            id="bookingTo"
+          >
+
+          <select id="bookingPlatformFilter">
+
+            
+            <option value="all">
+              All Platforms
+            </option>
+
+            <option>
+              Airbnb
+            </option>
+
+            <option>
+              Booking.com
+            </option>
+
+            <option>
+              Agoda
+            </option>
+
+            <option>
+              Goibibo
+            </option>
+
+            <option>
+              Direct
+            </option>
+
+          </select>
+<button
+  type="button"
+  class="report-pdf-btn"
+  id="bookingPdfBtn"
+>
+  📄 Booking PDF
+</button>
+          <button
+            class="secondary-btn"
+            id="clearFilters"
+          >
+            Clear
+          </button>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Guest</th>
+                <th>Platform</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Nights</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+            <tbody
+              id="bookingsTable"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REVENUE
+    ====================================================== -->
+
+    <section
+      class="page"
+      id="page-revenue"
+    >
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon green">
+            ₹
+          </div>
+
+          <div>
+            <span>Revenue</span>
+            <strong id="revenueTotal">
+              ₹0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon blue">
+            ▤
+          </div>
+
+          <div>
+            <span>Bookings</span>
+            <strong id="revenueBookings">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon purple">
+            ◷
+          </div>
+
+          <div>
+            <span>Nights</span>
+            <strong id="revenueNights">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Monthly Revenue</h2>
+            <p>Revenue by month</p>
+          </div>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Month</th>
+                <th>Bookings</th>
+                <th>Nights</th>
+                <th>Revenue</th>
+                <th>Average</th>
+              </tr>
+
+            </thead>
+
+            <tbody
+              id="monthlyRevenueTable"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORTS
+    ====================================================== -->
+
+    <section
+      class="page"
+      id="page-reports"
+    >
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Reports</h2>
+            <p>Filter your property performance</p>
+          </div>
+
+        </div>
+
+
+        <div class="report-filters">
+
+          <label>
+            From
+
+            <input
+              type="date"
+              id="reportFrom"
+            >
+
+          </label>
+
+
+          <label>
+            To
+
+            <input
+              type="date"
+              id="reportTo"
+            >
+
+          </label>
+
+
+          <button
+            class="primary-btn"
+            id="runReport"
+          >
+            Generate Report
+          </button>
+
+        </div>
+
+
+        <div
+          class="report-result"
+          id="reportResult"
+        >
+
+          <div class="empty-state">
+            Select dates and generate a report.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONNECTIONS
+    ====================================================== -->
+
+    <section
+      class="page"
+      id="page-connections"
+    >
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>OTA Calendars</h2>
+            <p>
+              Airbnb, Booking.com, Agoda, Goibibo
+            </p>
+          </div>
+
+          <button
+            class="primary-btn"
+            id="addCalendarBtn"
+          >
+            + Add Calendar
+          </button>
+
+        </div>
+
+
+        <div
+          class="connections"
+          id="connectionsList"
+        ></div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h2>Manual Blocks</h2>
+            <p>Dates blocked by you</p>
+          </div>
+
+          <button
+            class="danger-btn"
+            id="blockDateBtn"
+          >
+            + Block Dates
+          </button>
+
+        </div>
+
+
+        <div
+          class="blocks"
+          id="blocksList"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =========================================================
+     BOOKING MODAL
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="bookingModal"
+>
+
+  <div class="modal">
+
+    <button
+      class="modal-close"
+      data-close="bookingModal"
+    >
+      ×
+    </button>
+
+    <h2>Add Booking</h2>
+
+    <p class="modal-subtitle">
+      Add reservation details manually.
+    </p>
+
+
+    <form id="bookingForm">
+
+      <label>
+        Guest Name
+
+        <input
+          type="text"
+          id="guest"
+          required
+          placeholder="Guest name"
+        >
+
+      </label>
+
+
+      <label>
+        Platform
+
+        <select id="bookingPlatform">
+
+          <option>Airbnb</option>
+          <option>Booking.com</option>
+          <option>Agoda</option>
+          <option>Goibibo</option>
+          <option>Direct</option>
+
+        </select>
+
+      </label>
+
+
+      <div class="two-cols">
+
+        <label>
+          Check-in
+
+          <input
+            type="date"
+            id="checkIn"
+            required
+          >
+
+        </label>
+
+
+        <label>
+          Check-out
+
+          <input
+            type="date"
+            id="checkOut"
+            required
+          >
+
+        </label>
+
+      </div>
+
+
+      <label>
+        Amount
+
+        <input
+          type="number"
+          id="amount"
+          min="0"
+          step="0.01"
+          placeholder="₹ 0"
+        >
+
+      </label>
+
+
+      <label>
+        Status
+
+        <select id="bookingStatus">
+
+          <option>Confirmed</option>
+          <option>Pending</option>
+          <option>Cancelled</option>
+          <option>Completed</option>
+
+        </select>
+
+      </label>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          data-close="bookingModal"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          Save Booking
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     CALENDAR MODAL
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="calendarModal"
+>
+
+  <div class="modal">
+
+    <button
+      class="modal-close"
+      data-close="calendarModal"
+    >
+      ×
+    </button>
+
+    <h2>Add OTA Calendar</h2>
+
+    <p class="modal-subtitle">
+      Add an iCal calendar feed.
+    </p>
+
+
+    <form id="calendarForm">
+
+      <label>
+        Calendar Name
+
+        <input
+          type="text"
+          id="calendarName"
+          placeholder="My Airbnb"
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Platform
+
+        <select id="calendarPlatform">
+
+          <option>Airbnb</option>
+          <option>Booking.com</option>
+          <option>Agoda</option>
+          <option>Goibibo</option>
+          <option>Other</option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+        iCal URL
+
+        <input
+          type="url"
+          id="calendarUrl"
+          placeholder="https://..."
+          required
+        >
+
+      </label>
+
+
+      <label>
+        Calendar Color
+
+        <input
+          type="color"
+          id="calendarColor"
+          value="#ff385c"
+        >
+
+      </label>
+
+
+      <div class="warning">
+        Keep your private iCal URL secret.
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          data-close="calendarModal"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          Connect
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     BLOCK MODAL
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="blockModal"
+>
+
+  <div class="modal">
+
+    <button
+      class="modal-close"
+      data-close="blockModal"
+    >
+      ×
+    </button>
+
+    <h2>Block Dates</h2>
+
+    <p class="modal-subtitle">
+      Manually make dates unavailable.
+    </p>
+
+
+    <form id="blockForm">
+
+      <div class="two-cols">
+
+        <label>
+          From
+
+          <input
+            type="date"
+            id="blockStart"
+            required
+          >
+
+        </label>
+
+
+        <label>
+          To
+
+          <input
+            type="date"
+            id="blockEnd"
+            required
+          >
+
+        </label>
+
+      </div>
+
+
+      <label>
+        Reason
+
+        <input
+          type="text"
+          id="blockReason"
+          placeholder="Maintenance / Personal use"
+        >
+
+      </label>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          data-close="blockModal"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="danger-btn"
+        >
+          Block Dates
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
